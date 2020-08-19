@@ -8,7 +8,7 @@
 		</div>
 	{if $registrationDisabled}
 		{include file="$template/includes/alert.tpl" type="error" msg=$LANG.registerCreateAccount|cat:' <strong><a href="cart.php" class="alert-link">'|cat:$LANG.registerCreateAccountOrder|cat:'</a></strong>'}
-	{/if}
+	{else}
 
 	{if $errormessage}
 		{include file="$template/includes/alert.tpl" type="error" errorshtml=$errormessage}
@@ -26,7 +26,7 @@
 			<input type="hidden" name="address2" value="address2" />
 			<input type="hidden" name="lastname" value="~" />
 			<input type="hidden" name="country"  value="CN" />
-			
+
 			<div class="form-group">
 				<input name="firstname" id="firstname" value="{$clientfirstname}" class="form-control" placeholder="{$LANG.clientareafirstname}">
 			</div>
@@ -101,6 +101,16 @@
 			
 			{include file="$template/includes/captcha.tpl"}
 			
+
+			{if $showMarketingEmailOptIn}
+				<div class="form-group m-b-xl">
+					<div class="checkbox checkbox-primary">
+						<input type="checkbox" name="marketingoptin" id="marketingoptin" value="1"{if $marketingEmailOptIn} checked{/if}/>
+						<label for="marketingoptin">{lang key='emailMarketing.joinOurMailingList'} {$marketingEmailOptInMessage}</label>
+					</div>
+				</div>
+	        {/if}
+
 			{if $accepttos}
 				<div class="form-group m-b-xl">
 					<div class="checkbox checkbox-primary">
@@ -120,4 +130,5 @@
 		<p class="copyright pull-left"><a href="{$systemurl}login.php">{$LANG.loginbutton}</a></p>
 		<p class="footer-menu pull-right"><a href="{$systemurl}pwreset.php">{$LANG.forgotpw}</a></p>
 	</div>
+	{/if}
 </body>
